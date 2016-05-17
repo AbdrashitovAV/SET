@@ -1,0 +1,35 @@
+﻿<Window x:Class="SET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:Set.ViewModels;assembly=Set.ViewModels"
+        xmlns:views="clr-namespace:Set.Views;assembly=Set.Views"
+        xmlns:set="clr-namespace:SET"
+        Title="MainWindow" Height="720" Width="940" MinWidth="940">
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding EscapeKeyPressedCommand}"></KeyBinding>
+    </Window.InputBindings>
+    
+    <Window.Resources>
+        <BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <ContentControl>
+            <ContentControl.Content>
+                <Binding Path="BoardViewModel" UpdateSourceTrigger="PropertyChanged" />
+            </ContentControl.Content>
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModels:BoardViewModel}">
+                    <views:BoardView DataContext="{Binding ., UpdateSourceTrigger=PropertyChanged}"/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+
+        <!--        <views:BoardView DataContext="{Binding BoardViewModel}"/>-->
+        <views:MenuView Visibility="{Binding IsMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                        DataContext="{Binding}"/>
+
+        <views:RulesView Visibility="{Binding DataContext.IsRulesVisible, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=set:MainWindow}}" 
+                        DataContext="{Binding RulesViewModel}"/>
+    </Grid>
+</Window>

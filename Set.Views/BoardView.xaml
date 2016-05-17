@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Set.Views.BoardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:Set.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="940"
+             MinWidth="940" Margin="10">
+    <UserControl.Resources>
+        <Style x:Key="FindedSetsStyle"  TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="730"/>
+            <ColumnDefinition Width="210"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="Finded sets "
+                   Style="{StaticResource FindedSetsStyle}" />
+            <Label Content="{Binding FoundedSets}"
+                   Style="{StaticResource FindedSetsStyle}" 
+                   Margin="0,0,0,10"/>
+            <Label Content="Cards left in deck "
+                   Style="{StaticResource FindedSetsStyle}" />
+            <Label Content="{Binding Deck.Count}"
+                   Style="{StaticResource FindedSetsStyle}" 
+                   Margin="0,0,0,10"/>
+            <Label Content="Time elapsed "
+                   Style="{StaticResource FindedSetsStyle}" />
+            <Label Content="{Binding ElapsedTime}"
+                   Style="{StaticResource FindedSetsStyle}" 
+                   Margin="0,0,0,10"/>
+        </StackPanel>
+        <Button Grid.Column="1"
+                Margin="15,400,15,0" 
+                Content="Set!" FontSize="20" 
+                HorizontalAlignment="Center"  VerticalAlignment="Top"
+                Height="40" Width="80" 
+                Command="{Binding SetCommand}"/>
+        <StackPanel Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding CardOnBoardViewModels}" HorizontalAlignment="Center" MaxWidth="730">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:CardView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+    <!--    <StackPanel>-->
+    <!--        <Grid HorizontalAlignment="Left">-->
+    <!--            <Grid.ColumnDefinitions>-->
+    <!--                <ColumnDefinition />-->
+    <!--                <ColumnDefinition Width="60"/>-->
+    <!--            </Grid.ColumnDefinitions>-->
+    <!--            <Grid.RowDefinitions>-->
+    <!--                <RowDefinition Height="*"/>-->
+    <!--                <RowDefinition Height="*"/>-->
+    <!--                <RowDefinition Height="*"/>-->
+    <!--            </Grid.RowDefinitions>-->
+    <!--            -->
+    <!--        </Grid>-->
+    <!--        -->
+    <!---->
+<!--        -->
+    <!--    </StackPanel>-->
+</UserControl>
